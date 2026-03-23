@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quanto você está perdendo com combustível?</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+    
+    .tail-container {
+      max-width: 420px;
+      margin: 0 auto;
+      background: #f8fafc;
+      min-height: 100vh;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+<div class="tail-container p-5">
+
+  <!-- TELA INICIAL -->
+  <div id="start-screen" class="flex flex-col h-screen justify-center">
+    <div class="text-center">
+      <div class="inline-flex items-center gap-3 bg-orange-100 text-orange-600 px-6 py-3 rounded-2xl text-sm font-semibold mb-8">
+        <i class="fas fa-exclamation-triangle"></i>
+        DESCUBRA AGORA
+      </div>
+      
+      <h1 class="text-4xl font-bold leading-tight mb-4">
+        Quanto dinheiro você<br>está <span class="text-orange-500">perdendo</span> com combustível?
+      </h1>
+      
+      <p class="text-slate-600 text-lg mb-10">
+        Responda 6 perguntas rápidas e receba seu diagnóstico personalizado.
+      </p>
+
+      <button onclick="startQuiz()" 
+              class="w-full bg-emerald-600 hover:bg-emerald-700 transition-colors text-white font-semibold text-lg py-5 rounded-3xl shadow-xl">
+        COMEÇAR AGORA
+      </button>
+
+      <div class="flex justify-center gap-8 mt-12 text-sm">
+        <div>
+          <span class="block text-emerald-600 font-semibold text-2xl">+12.450</span>
+          <span class="text-slate-500">motoristas já economizaram</span>
+        </div>
+        <div>
+          <span class="block text-emerald-600 font-semibold text-2xl">R$ 287</span>
+          <span class="text-slate-500">economia média mensal</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz-screen" class="hidden">
+    <div class="flex items-center justify-between mb-6">
+      <div onclick="goBack()" class="cursor-pointer text-slate-500 hover:text-slate-700">
+        <i class="fas fa-arrow-left text-xl"></i>
+      </div>
+      <div class="text-sm font-medium text-slate-500">
+        <span id="current-q">1</span>/6
+      </div>
+    </div>
+
+    <div class="h-2 bg-slate-200 rounded-full overflow-hidden mb-10">
+      <div id="progress" class="h-full bg-gradient-to-r from-emerald-500 to-green-500 w-0 rounded-full transition-all duration-700"></div>
+    </div>
+
+    <div class="bg-white border border-slate-200 shadow-sm rounded-3xl p-8">
+      <h2 id="question-text" class="text-2xl font-semibold leading-tight min-h-[110px]"></h2>
+      
+      <div id="options-container" class="space-y-4 mt-10"></div>
+    </div>
+
+    <button id="next-button" 
+            onclick="nextQuestion()"
+            disabled
+            class="mt-8 w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-300 text-white font-semibold py-5 rounded-3xl text-lg transition-colors">
+      CONTINUAR
+    </button>
+  </div>
+
+  <!-- LOADING -->
+  <div id="loading-screen" class="hidden flex flex-col items-center justify-center h-screen">
+    <div class="w-16 h-16 border-4 border-slate-200 border-t-emerald-600 rounded-full animate-spin mb-8"></div>
+    <h2 class="text-2xl font-semibold mb-2 text-slate-800">Analisando suas respostas...</h2>
+    <p class="text-slate-600 text-center max-w-[260px]">
+      Calculando seu perfil de consumo e oportunidades de economia
+    </p>
+  </div>
+
+  <!-- RESULTADO -->
+  <div id="result-screen" class="hidden">
+    <div class="text-center pt-8">
+      <div class="inline-flex items-center gap-2 bg-orange-100 text-orange-600 px-5 py-2 rounded-2xl text-sm font-semibold">
+        <i class="fas fa-exclamation-triangle"></i>
+        SEU RESULTADO
+      </div>
+      
+      <div class="mt-8">
+        <p class="text-slate-600">Você pode estar perdendo até</p>
+        <div id="loss-amount" class="text-6xl font-bold text-orange-500 mt-2 mb-1">R$ 280</div>
+        <p class="text-slate-600">por mês com combustível</p>
+      </div>
+
+      <div class="mt-10 bg-white border border-slate-200 rounded-3xl p-7 shadow-sm">
+        <p class="text-emerald-600 font-semibold">Boa notícia: isso pode ser corrigido facilmente.</p>
+        <p class="text-slate-600 mt-4 text-[15px] leading-relaxed">
+          Com base nas suas respostas, detectamos que seu carro está consumindo mais do que deveria. 
+          Um simples ajuste pode reduzir seu consumo em até 30%.
+        </p>
+      </div>
+            <style>
+        .video-container {
+  width: 60%;
+  max-width: 230px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.video-container video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 20px;
+}
+</style>
+<div class="video-container">
+  <video controls controlsList="nodownload nofullscreen noremoteplayback">
+    <source src="prov.mp4" type="video/mp4">
+    Seu navegador não suporta vídeo.
+  </video>
+</div>
+
+      <!-- Produto -->
+      <div class="mt-10">
+        <img src="pro1.webp" 
+             alt="Dispositivo de economia de combustível" 
+             class="mx-auto rounded-2xl shadow-lg w-64">
+      </div>
+
+      <ul class="mt-10 space-y-4 text-left max-w-xs mx-auto text-slate-700">
+        <li class="flex items-center gap-3">
+          <i class="fas fa-check text-emerald-600"></i>
+          <span>Redução de até 30% no consumo</span>
+        </li>
+        <li class="flex items-center gap-3">
+          <i class="fas fa-check text-emerald-600"></i>
+          <span>Instalação simples em poucos minutos</span>
+        </li>
+        <li class="flex items-center gap-3">
+          <i class="fas fa-check text-emerald-600"></i>
+          <span>Economia visível já na primeira semana</span>
+        </li>
+      </ul>
+
+      <button onclick="contactNow()" 
+              class="mt-12 w-full bg-emerald-600 hover:bg-emerald-700 transition-colors py-6 rounded-3xl font-bold text-xl text-white shadow-xl">
+        QUERO ECONOMIZAR AGORA
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const questions = [
+    { q: "Com que frequência você abastece seu carro?", options: ["Toda semana", "A cada 2 semanas", "1 vez por mês", "Não lembro direito"] },
+    { q: "Quanto você gasta em média por mês com combustível?", options: ["Menos de R$ 200", "R$ 200 a R$ 400", "R$ 400 a R$ 800", "Mais de R$ 800"] },
+    { q: "Qual combustível você usa com mais frequência?", options: ["Gasolina", "Etanol", "Flex (os dois)", "Diesel"] },
+    { q: "Você sente que o carro está consumindo mais que o normal?", options: ["Sim, bastante", "Sim, um pouco", "Não sei ao certo", "Não"] },
+    { q: "Qual é o ano aproximado do seu carro?", options: ["Antes de 2012", "2012 a 2018", "2019 a 2023", "2024 ou mais novo"] },
+    { q: "Você costuma fazer manutenção preventiva regularmente?", options: ["Sim, sempre", "Às vezes", "Quase nunca", "Nunca"] }
+  ];
+
+  let currentQuestion = 0;
+  let selectedAnswers = [];
+
+  function startQuiz() {
+    document.getElementById('start-screen').classList.add('hidden');
+    document.getElementById('quiz-screen').classList.remove('hidden');
+    currentQuestion = 0;
+    selectedAnswers = [];
+    showQuestion();
+  }
+
+  function showQuestion() {
+    const q = questions[currentQuestion];
+    
+    document.getElementById('current-q').textContent = currentQuestion + 1;
+    document.getElementById('question-text').textContent = q.q;
+    
+    const container = document.getElementById('options-container');
+    container.innerHTML = '';
+    
+    q.options.forEach((option, index) => {
+      const div = document.createElement('div');
+      div.className = `p-5 rounded-2xl border border-slate-200 bg-white hover:border-emerald-500 cursor-pointer transition-all font-medium`;
+      div.textContent = option;
+      div.onclick = () => selectOption(index, div);
+      container.appendChild(div);
+    });
+    
+    document.getElementById('next-button').disabled = true;
+    updateProgress();
+  }
+
+  function selectOption(index, element) {
+    selectedAnswers[currentQuestion] = index;
+    
+    document.querySelectorAll('#options-container > div').forEach(el => {
+      el.classList.remove('border-emerald-500', 'bg-emerald-50');
+    });
+    
+    element.classList.add('border-emerald-500', 'bg-emerald-50');
+    document.getElementById('next-button').disabled = false;
+  }
+
+  function updateProgress() {
+    const percent = ((currentQuestion) / questions.length) * 100;
+    document.getElementById('progress').style.width = `${percent}%`;
+  }
+
+  function nextQuestion() {
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+      showQuestion();
+    } else {
+      document.getElementById('quiz-screen').classList.add('hidden');
+      document.getElementById('loading-screen').classList.remove('hidden');
+      setTimeout(showResult, 2600);
+    }
+  }
+
+  function showResult() {
+    document.getElementById('loading-screen').classList.add('hidden');
+    document.getElementById('result-screen').classList.remove('hidden');
+    
+    const gastoIndex = selectedAnswers[1] || 2;
+    const values = [180, 250, 320, 420];
+    const loss = values[gastoIndex] || 280;
+    
+    document.getElementById('loss-amount').textContent = `R$ ${loss}`;
+  }
+
+  function goBack() {
+    if (currentQuestion > 0) {
+      currentQuestion--;
+      showQuestion();
+    }
+  }
+
+  function contactNow() {
+    window.location.href = "https://ggcheckout.com.br/checkout/v2/wclVCjOKvF08QmZ6Uiqj";
+  }
+
+  window.onload = () => {
+    document.getElementById('start-screen').classList.remove('hidden');
+  };
+</script>
+
+</body>
+</html>
